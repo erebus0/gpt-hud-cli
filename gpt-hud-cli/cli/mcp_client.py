@@ -1,4 +1,3 @@
-# minimal stdio JSON-RPC client with stderr capture (spaces only)
 import json, os, subprocess, threading, queue, re, time
 CONTENT_LEN_RE = re.compile(rb"Content-Length:\s*(\d+)\r\n\r\n", re.I)
 

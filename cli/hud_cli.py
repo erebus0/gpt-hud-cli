@@ -28,7 +28,7 @@ def banner(conf: dict):
     t.add_row("Provider", f"{prof.get('provider')} @{prof.get('model')}")
     roots = prof.get("roots", [])
     t.add_row("Roots", "\n".join(roots) if roots else "(none) - /roots add <path>")
-    console.print(Panel(t, title="GPT-HUD — Phase 2", border_style="cyan"))
+    console.print(Panel(t, title="HUD-CLI — Phase 2", border_style="cyan"))
 
 def cmd_status(conf):
     prof = cfg.active_profile(conf)
@@ -175,7 +175,6 @@ def repl():
         if s.startswith("/edit "): cmd_edit(conf, s.split()[1:]); continue
         if s.startswith("/exec "): cmd_exec(conf, s.split()[1:]); continue
         if s.startswith("/deps"): cmd_deps(conf, s.split()[1:]); continue
-        # otherwise treat as chat
         do_chat(conf, s)
 
 if __name__ == "__main__":

@@ -1,8 +1,29 @@
 from __future__ import annotations
-import os, yaml
+import os, shutil
 from pathlib import Path
+import yaml
 
-APP_DIR = Path(os.environ.get("GPT_HUD_HOME", Path.home() / ".gpt_hud"))
+NEW_HOME_ENV = "HUD_HOME"
+LEGACY_HOME_ENV = "GPT_HUD_HOME"
+
+def _resolve_app_dir() -> Path:
+    home = os.environ.get(NEW_HOME_ENV) or os.environ.get(LEGACY_HOME_ENV)
+    if home:
+        return Path(home).expanduser()
+    new_dir = Path.home() / ".hud_cli"
+    legacy_dir = Path.home() / ".gpt_hud"
+    if legacy_dir.exists() and not new_dir.exists():
+        try:
+            new_dir.mkdir(parents=True, exist_ok=True)
+            for name in ("config.yaml", "audit.log"):
+                src = legacy_dir / name
+                if src.exists():
+                    (new_dir / name).write_bytes(src.read_bytes())
+        except Exception:
+            pass
+    return new_dir
+
+APP_DIR = _resolve_app_dir()
 APP_DIR.mkdir(parents=True, exist_ok=True)
 CONFIG_PATH = APP_DIR / "config.yaml"
 AUDIT_LOG = APP_DIR / "audit.log"

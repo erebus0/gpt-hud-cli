@@ -1,7 +1,3 @@
-# gpt_cli.py — GPT-HUD CLI with MCP auto-spawn, file helpers, and end-of-session usage
-# Paste this whole file. Requires: requests, python-dotenv, rich
-# Your tiny MCP client must be in the same folder as mcp_client.py
-
 import os
 import sys
 import json

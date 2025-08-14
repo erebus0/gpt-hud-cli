@@ -1,0 +1,1 @@
+# HUD-CLI — Branding Update Patch\n\nThis patch updates the banner branding to **HUD-CLI** and migrates config from `~/.gpt_hud` to `~/.hud_cli` with safe fallback. Drop these files into your repo and commit.\n
